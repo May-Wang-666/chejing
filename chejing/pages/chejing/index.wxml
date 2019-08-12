@@ -1,0 +1,26 @@
+<!--pages/chejing/index.wxml-->
+
+<view class="title">
+  <text class="weui-cells__title">随机来点儿快乐</text>
+</view>
+
+<view id="photo">
+  <image src="/image/jerry.jpg" class="photo"></image>
+</view>
+
+<view id="button">
+  <button id="cj_ramdom" class="weui-btn" type="primary" bindtap="getChejing">点 我</button>
+</view>
+
+<view id="content">
+  <view class="content">
+    <text>{{chejing}}</text>
+    <view id="lidan">
+      <text> from：李诞 《扯经》 </text>
+    </view>
+  </view>
+</view>
+
+<view id="footer">
+  <view class="weui-footer__text"> - Copyright:@朱七七 - </view>
+</view>

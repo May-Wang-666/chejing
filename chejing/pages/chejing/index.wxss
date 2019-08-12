@@ -1,0 +1,60 @@
+/**index.wxss**/
+@import '/dist/style/weui.wxss';
+
+.title {
+  display: flex;
+  justify-content: center;
+  margin-block-end: 10rpx;
+}
+
+.photo {
+  height: 80px;
+  width: 80px;
+  border-radius: 100px;
+}
+
+.content{
+  width: 80%;
+  height: 90%;
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  border-radius: 20rpx;
+  background-color: rgba(199, 200, 201, 0.288);  
+}
+
+#photo{
+  display: flex;
+  justify-content: center;
+  margin-block-start: 70rpx;
+  margin-block-end: 100rpx;
+}
+
+#button{
+  margin-left: 250rpx;
+  margin-right: 250rpx;
+  margin-block-end: 30rpx;
+}
+
+#content{
+  display: flex;
+  justify-content: center;
+  line-height: 50rpx;
+}
+
+#lidan{
+  text-align: right;
+  padding-right: 20rpx;
+  font-size: 10pt;
+  color: red;
+}
+
+#footer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  margin-block-end: 50rpx;
+}
