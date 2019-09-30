@@ -28,13 +28,13 @@
   display: flex;
   justify-content: center;
   margin-block-start: 70rpx;
-  margin-block-end: 100rpx;
+  margin-block-end: 50rpx;
 }
 
 #button{
-  margin-left: 250rpx;
-  margin-right: 250rpx;
-  margin-block-end: 30rpx;
+  margin-left: 260rpx;
+  margin-right: 260rpx;
+  margin-block-end: 50rpx;
 }
 
 #content{

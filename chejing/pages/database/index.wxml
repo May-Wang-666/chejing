@@ -1,0 +1,21 @@
+<!--pages/database/index.wxml-->
+<!-- <view class="title">
+  <text>随机生产快乐</text>
+</view> -->
+
+<view id="photo">
+  <image src="{{userInfo.avatarUrl}}" class="photo"></image>
+</view>
+
+<view class="subTitle">随机生产快乐</view>
+
+<view class="inputTextInner" >
+    <textarea maxlength="200" placeholder="随便输入你喜欢的文字叭~" auto-focus bindinput="contentInput"  value="{{content}}"/>
+</view>
+
+<!-- <view class="subTitle">CopyRight</view> -->
+<view class="inputTextInner">
+  <input maxlength="10" placeholder="大侠请留步，您的名号是？" bindinput="originInput" id='origin' value="{{origin}}"/>
+</view>
+
+<button id="button" bindtap="insertRecord" class="weui-btn" type='primary'> 提 交 </button>

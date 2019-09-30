@@ -5,7 +5,7 @@
 	},
 	"setting": {
 		"urlCheck": true,
-		"es6": true,
+		"es6": false,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
@@ -22,6 +22,7 @@
 	"isGameTourist": false,
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
+  "cloudfunctionRoot":"./cloudFunctions",
 	"condition": {
 		"search": {
 			"current": -1,

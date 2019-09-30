@@ -1,0 +1,45 @@
+@import '/dist/style/weui.wxss';
+
+.photo {
+  height: 80px;
+  width: 80px;
+  border-radius: 100px;
+}
+
+.subTitle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10rpx;
+  margin-top: 10rpx;
+}
+
+#photo {
+  display: flex;
+  justify-content: center;
+  margin-block-start: 50rpx;
+  margin-block-end: 70rpx;
+}
+
+.inputTextInner {
+  margin: 20px;
+}
+
+textarea, input {
+  background-color: rgba(199, 200, 201, 0.288);
+  color: rgb(5, 36, 82);
+  border-radius: 20rpx;
+  font-size: 30rpx;
+  width: 100%;
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+
+#origin {
+  height: 100rpx;
+  color: blueviolet;
+}
+
+#button {
+  width: 220rpx;
+  margin-top: 100rpx;
+}

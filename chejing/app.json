@@ -1,13 +1,33 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/chejing/index",
-    "pages/index/index"
+    "pages/database/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "嘿呀你的小可爱出现啦",
+    "navigationBarTitleText": "今天也是很开心的一天呢",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#a9b7b7",
+    "selectedColor": "#11cd6e",
+    "borderStyle": "black",
+    "list": [
+      { 
+        "selectedIconPath": "./image/laugh-red.png",
+        "iconPath": "./image/happy.png",
+        "pagePath": "pages/chejing/index",
+        "text": "来点儿快乐"
+      },
+      {
+        "selectedIconPath": "./image/encourage-red.png",
+        "iconPath": "./image/cute.png",
+        "pagePath": "pages/database/index",
+        "text": "加点儿快乐"
+      }
+    ]
   },
   "sitemapLocation": "sitemap.json"
 }

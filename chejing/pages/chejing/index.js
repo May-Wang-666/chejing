@@ -1,12 +1,16 @@
 // pages/chejing/index.js
+wx.cloud.init();
+const db = wx.cloud.database();
+const app = getApp();
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    chejing:"师傅，好大风雨。\n澈丹，少做感慨。",
-    chejingArray:[
+    chejing: "师傅，好大风雨。\n澈丹，少做感慨。",
+    chejingArray: [
       "如是我闻：须菩提庆生，佛告曰，此是一世，前有无穷世，后有无穷世，所谓生日只是来日，所谓死日只是去日，来去如烟，何必庆祝？你就别跟我要蛋糕了，乖，Happy birthday to you。须菩提白佛言：Are you kidding me？",
       "师傅，你知道我在想什么吗？\n昨天那个女施主。\n你怎么知道？\n我也在想。\n那你怎么睡得着？\n那是大方丈的外甥女，想也白想。",
       "小和尚，听说你喜欢我？\n不好说喜欢，只是看见你会乱。\n听说你还想娶我？\n不好说想娶，只是想永远和你在一起。\n油嘴滑舌，你丫天秤座的吧？\n阿弥陀佛，心直口快，女施主别不是天蝎座的吧？咱俩正合。\n合你大爷，你们佛门弟子还信这个？",
@@ -66,10 +70,38 @@ Page({
       "小北，我很久不给你写情话了，我想，我是个普通人，怎么能那么爱你。",
       "小北，我只是喜欢你。\n你只是喝多了，澈丹。",
       "小北，我很久不说轻薄的话了，无论是对世界还是对你。内心逐渐痴肥，人格逐渐呆板，面目倒是一如既往地可憎，这让我略感欣慰。我师父说，我无端发笑的次数越来越多了。小北，我想念你的次数却没有减少。"
-    ]
+    ],
+    total: null,
+    content: "师傅，好大风雨。\n澈丹，少做感慨。",
+    origin: "李诞 《扯经》",
+    userInfo:{},
+    // hasUserInfo: false,
+    // canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
 
-  getChejing: function(res) {
+  getChejing: function() {
+    var index = Math.floor(Math.random() * this.data.total) + 1;
+    console.log("index = " + index);
+    db.collection('chejing').doc(index).get().then((res) => {
+      console.log(res);
+      this.setData({
+        content: res.data.content,
+        origin: res.data.origin
+      });
+    });
+  },
+
+  /**
+   * 获取记录总数
+   */
+  getTotal: function() {
+    db.collection('counters').doc('chejing_total').get().then((res) => {
+      this.data.total = res.data.count;
+      console.log(this.data.total);
+    })
+  },
+
+  getChejingOld: function(res) {
     const length = this.data.chejingArray.length
     var index = Math.floor(Math.random() * length)
     this.data.chejing = this.data.chejingArray[index]
@@ -103,13 +135,30 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.getTotal();
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
+      })
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
+/**
+ * 生命周期函数--监听页面初次渲染完成
+ */
+onReady: function() {
 
   },
 
@@ -117,7 +166,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.getTotal();
   },
 
   /**
