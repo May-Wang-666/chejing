@@ -4,7 +4,8 @@
 </view> -->
 
 <view id="photo">
-  <image src="{{userInfo.avatarUrl}}" class="photo"></image>
+  <image wx:if="{{!hasUserInfo}}" src="../../image/jerry.jpg" class="photo"/>
+  <image wx:else src="{{userInfo.avatarUrl}}" class="photo"/>
 </view>
 
 <view class="subTitle">随机生产快乐</view>

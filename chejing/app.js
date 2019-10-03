@@ -1,6 +1,13 @@
 //app.js
 App({
   onLaunch: function () {
+    // 全局变量
+    this.globalData.configuration = {
+      dbCount: "counters",
+      docCount: "chejing_total_v2",
+      dbData: "chejing_v2"
+    };
+
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -35,6 +42,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    configuration: {}
   }
 })

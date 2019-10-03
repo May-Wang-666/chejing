@@ -74,15 +74,15 @@ Page({
     total: null,
     content: "师傅，好大风雨。\n澈丹，少做感慨。",
     origin: "李诞 《扯经》",
-    userInfo:{},
-    // hasUserInfo: false,
-    // canIUse: wx.canIUse('button.open-type.getUserInfo')
+    userInfo: {},
+    hasUserInfo: false,
+    config: app.globalData.configuration
   },
 
   getChejing: function() {
     var index = Math.floor(Math.random() * this.data.total) + 1;
     console.log("index = " + index);
-    db.collection('chejing').doc(index).get().then((res) => {
+    db.collection(this.data.config.dbData).doc(index).get().then((res) => {
       console.log(res);
       this.setData({
         content: res.data.content,
@@ -95,7 +95,7 @@ Page({
    * 获取记录总数
    */
   getTotal: function() {
-    db.collection('counters').doc('chejing_total').get().then((res) => {
+    db.collection(this.data.config.dbCount).doc(this.data.config.docCount).get().then((res) => {
       this.data.total = res.data.count;
       console.log(this.data.total);
     })
@@ -135,7 +135,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.getTotal();
+
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -153,19 +166,6 @@ Page({
         }
       })
     }
-  },
-
-/**
- * 生命周期函数--监听页面初次渲染完成
- */
-onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
     this.getTotal();
   },
 

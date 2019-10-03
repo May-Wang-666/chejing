@@ -21,8 +21,8 @@ page{
 }
 
 .userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
+  width: 80px;
+  height: 80px;
   margin: 20rpx;
   border-radius: 50%;
 }

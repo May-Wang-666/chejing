@@ -13,7 +13,9 @@ Page({
     content: "",
     origin: "",
     count: "",
-    userInfo: {}
+    userInfo: {},
+    hasUserInfo: false,
+    config: app.globalData.configuration
   },
 
   /**
@@ -34,7 +36,6 @@ Page({
    * 插入用户输入的记录进数据库
    */
   async insertRecord() {
-    await this.updateCount();
     if (this.data.content.length == 0 || this.data.origin.length == 0) {
       wx.showToast({
         title: '不能留空哟',
@@ -42,8 +43,9 @@ Page({
         duration: 2000
       });
     } else {
-      await db.collection('counters').doc('chejing_total').get().then((res) => {
-        db.collection("chejing").add({
+      await this.updateCount();
+      await db.collection(this.data.config.dbCount).doc(this.data.config.docCount).get().then((res) => {
+        db.collection(this.data.config.dbData).add({
           data: {
             _id: res.data.count,
             content: this.data.content,
@@ -73,6 +75,10 @@ Page({
     return new Promise((resolve) => {
       wx.cloud.callFunction({
         name: 'incrCount',
+        data:{
+          dbName: this.data.config.dbCount,
+          docName: this.data.config.docCount
+        },
         success() {
           console.log("调用云函数成功");
           resolve();
@@ -86,6 +92,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
+    this.setData({
+      origin: ""
+    });
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -103,22 +126,6 @@ Page({
         }
       })
     }
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-    this.setData({
-      origin: ""
-    });
   },
 
   /**

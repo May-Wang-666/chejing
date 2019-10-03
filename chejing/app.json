@@ -1,8 +1,8 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/chejing/index",
-    "pages/database/index"
+    "pages/database/index",
+    "pages/index/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -16,16 +16,22 @@
     "borderStyle": "black",
     "list": [
       { 
-        "selectedIconPath": "./image/laugh-red.png",
-        "iconPath": "./image/happy.png",
+        "selectedIconPath": "./image/shock-green.png",
+        "iconPath": "./image/happy-default.png",
         "pagePath": "pages/chejing/index",
         "text": "来点儿快乐"
       },
       {
-        "selectedIconPath": "./image/encourage-red.png",
-        "iconPath": "./image/cute.png",
+        "selectedIconPath": "./image/encourage-green.png",
+        "iconPath": "./image/cute-default.png",
         "pagePath": "pages/database/index",
         "text": "加点儿快乐"
+      },
+      {
+        "selectedIconPath": "./image/monkeyface-green.png",
+        "iconPath": "./image/zhayan.png",
+        "pagePath": "pages/index/index",
+        "text": "你的快乐"
       }
     ]
   },

@@ -1,7 +1,8 @@
 <!--index.wxml-->
 <view class="container">
   <view class="userinfo" >
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 点击获取微信授权 </button>
+    <button wx:if="{{!hasUserInfo}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 微信登录 </button>
+    <text wx:if="{{!hasUserInfo}}" style="margin-top:20px;"> :-3 登陆后获取自己的头像 :-3 </text>
     <block wx:else>
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
