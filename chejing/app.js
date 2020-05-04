@@ -5,8 +5,13 @@ App({
     this.globalData.configuration = {
       dbCount: "counters",
       docCount: "chejing_total_v2",
-      dbData: "chejing_v2"
+      dbData: "chejing_v2",
+      dbComment: "comment"
     };
+
+    wx.cloud.init({
+      traceUser:true
+    })
 
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
@@ -41,6 +46,7 @@ App({
       }
     })
   },
+
   globalData: {
     userInfo: null,
     configuration: {}

@@ -16,7 +16,12 @@
 
 <!-- <view class="subTitle">CopyRight</view> -->
 <view class="inputTextInner">
-  <input maxlength="10" placeholder="大侠请留步，您的名号是？" bindinput="originInput" id='origin' value="{{origin}}"/>
+  <input maxlength="20" placeholder="大侠请留步，您的名号是？" bindinput="originInput" id='origin' value="{{origin}}"/>
 </view>
 
-<button id="button" bindtap="insertRecord" class="weui-btn" type='primary'> 提 交 </button>
+<view class="wrapper-submit-img">
+  <image src="cloud://febbywang-uhj76.6665-febbywang-uhj76-1300018356/img/submit.png"  bindtap="insertRecord" class="submit-img"></image>
+</view>
+
+
+<!-- <button id="button" bindtap="insertRecord" class="weui-btn" type='primary'> 提 交 </button> -->

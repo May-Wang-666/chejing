@@ -1,7 +1,7 @@
 // pages/chejing/index.js
-wx.cloud.init();
 const db = wx.cloud.database();
 const app = getApp();
+const utils = require("../../utils/util");
 
 Page({
 
@@ -74,58 +74,126 @@ Page({
     total: null,
     content: "师傅，好大风雨。\n澈丹，少做感慨。",
     origin: "李诞 《扯经》",
+    content_id: 1,
+    comments:[],
+    hasComments: false,
     userInfo: {},
     hasUserInfo: false,
-    config: app.globalData.configuration
+    config: app.globalData.configuration,
+    hideCommentBox: true,
+    commentValue: ""
   },
 
-  getChejing: function() {
+  formatTime: utils.formatTime,
+
+  getChejing:async function () {
+    this.setData({
+      comments:[]
+    })
     var index = Math.floor(Math.random() * this.data.total) + 1;
-    console.log("index = " + index);
-    db.collection(this.data.config.dbData).doc(index).get().then((res) => {
-      console.log(res);
+    await utils.getHappyById(index)
+    .then((res) => {
       this.setData({
-        content: res.data.content,
-        origin: res.data.origin
-      });
+        content: res.data[0].content,
+        content_id: res.data[0]._id,
+        origin: res.data[0].origin
+        });
+    })
+    this.getComments();
+  },
+
+  getComments: function(){
+    utils.getCommentsById(this.data.content_id)
+    .then((res) => {
+      comments = []
+      res.data.forEach((item,index)=>{
+          comments.push({
+            "comment": item.comment,
+            "time": utils.formatTime(new Date(item.time))
+          })
+      })
+      this.setData({
+        comments: comments
+      })
     });
   },
 
   /**
    * 获取记录总数
    */
-  getTotal: function() {
+  getTotal: function () {
     db.collection(this.data.config.dbCount).doc(this.data.config.docCount).get().then((res) => {
       this.data.total = res.data.count;
-      console.log(this.data.total);
     })
   },
 
-  getChejingOld: function(res) {
-    const length = this.data.chejingArray.length
-    var index = Math.floor(Math.random() * length)
-    this.data.chejing = this.data.chejingArray[index]
+   /**
+   * 显示评论框
+   */
+  showCommentBox: function () {
     this.setData({
-      chejing: this.data.chejing
+      hideCommentBox: false
     })
   },
 
-  getChejingHttp: function(res) {
+  commentInput: function(e) {
+    this.data.commentValue = e.detail.value.trim();
+  },
+
+  /**
+   * 将评论写入数据库
+   */
+  writeComment: function () {
+    if (this.data.commentValue.length == 0 || this.data.origin.length == 0) {
+      wx.showToast({
+        title: '你什么也没填哟',
+        image: "../../image/daidai.png",
+        duration: 2000
+      });
+    } else {
+      db.collection(this.data.config.dbComment).add({
+        data: {
+          origin_id: this.data.content_id,
+          comment: this.data.commentValue,
+          time: Date.parse(new Date())
+        },
+        success(res) {
+          console.log('insert comment sccess')
+        },
+        fail: console.error
+      })
+      // 隐藏评论框
+      this.setData({
+        commentValue: null,
+        hideCommentBox: true
+      });
+
+      this.getComments();
+
+      wx.showToast({
+        title: '评论已入库',
+        image: "../../image/success.png",
+        duration: 2000,
+        mask:true
+      });
+    }
+  },
+
+  getChejingHttp: function (res) {
     var url = 'http://115.159.215.229:8080/wx-robot/reply?keyword=扯经'
     wx.request({
       url: url,
       data: {},
       method: 'GET',
-      success: function(res) {
-        console.log(res.data)
+      success: function (res) {
         this.setData({
           chejing: res.data
         })
       },
-      fail: function() {
+      fail: function () {
         // fail
       },
-      complete: function() {
+      complete: function () {
         // complete
       }
     })
@@ -134,21 +202,21 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
 
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -167,40 +235,41 @@ Page({
       })
     }
     this.getTotal();
+    this.getComments();
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })

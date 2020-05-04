@@ -1,4 +1,5 @@
 <!--pages/chejing/index.wxml-->
+<import src="../../utils/util.wxml"/>
 
 <view class="title">
   <text class="weui-cells__title">随机来点儿快乐</text>
@@ -9,9 +10,9 @@
   <image wx:else src="{{userInfo.avatarUrl}}" class="photo"/>
 </view>
 
-<view id="button">
+<!-- <view id="button">
   <button id="cj_ramdom" class="weui-btn" type="primary" bindtap="getChejing">戳一下</button>
-</view>
+</view> -->
 
 <view id="content">
   <view class="content">
@@ -20,6 +21,23 @@
       <text> from：{{origin}} </text>
     </view>
   </view>
+</view>
+
+<view id="buttons">
+  <image class="button-img" src="cloud://febbywang-uhj76.6665-febbywang-uhj76-1300018356/img/memo1.png"  bindtap="showCommentBox"/>
+  <image class="button-img button-img-long" src="cloud://febbywang-uhj76.6665-febbywang-uhj76-1300018356/img/more.png" bindtap="getChejing"/>
+</view>
+
+<view id="comments" wx:for="{{comments}}" wx:for-item="comItem" class="weui-media-box weui-media-box_text comments-view">
+  <h5 class="weui-media-box__title comment-content">{{comItem.comment}}</h5>
+  <p class="weui-media-box__desc comment-time">{{comItem.time}}</p>
+</view>
+
+<view class="back-page" hidden="{{hideCommentBox}}" >
+    <view class="release">
+        <textarea autoHeight="true" bindinput="commentInput" class="text" cursorSpacing="20" fixed="true"  placeholder="写评论" placeholderClass="input_null" showConfirmBar="" model:value="{{commentValue}}"></textarea>
+        <view catchtap="writeComment" class="submit">发送</view>
+    </view>
 </view>
 
 <!-- <view id="footer">

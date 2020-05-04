@@ -1,16 +1,29 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="userinfo" >
-    <button wx:if="{{!hasUserInfo}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 微信登录 </button>
-    <text wx:if="{{!hasUserInfo}}" style="margin-top:20px;"> :-3 登陆后获取自己的头像 :-3 </text>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      <view class="usermotto">
-        <text class="user-motto">{{motto}}</text>
-      </view>
-    </block>
-  </view>
+	<view class="userinfo">
+		<text style="margin-bottom:20rpx">是你的快乐吗</text>
+		<button wx:if="{{!hasUserInfo}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 微信登录 </button>
+		<text wx:if="{{!hasUserInfo}}" style="margin-top:20px;"> :-3 登陆后获取自己的头像 :-3 </text>
+		<block wx:else>
+			<image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+			<text class="userinfo-nickname">{{userInfo.nickName}}</text>
+		</block>
+	</view>
+	<image wx:if="{{!openid}}" src="../../image/success.png" class="background"></image>
+</view>
 
-  <image class='background' src="../../image/dog.jpeg" mode="aspectFill"></image>
+<view wx:if="{{openid != null}}" class="weui-cell  weui-cell_access happy_wrapper" wx:for="{{happiness}}" wx:for-item="happyItem">
+	<p wx:if="{{detailId != happyItem._id}}" class="weui-cell__bd happy_item" bindtap="getDetail" id="{{happyItem._id}}">{{happyItem.content}}</p>
+	<block wx:else>
+		<view wx:if="{{detailId == happyItem._id}}" class="detail" bindtap="hideDetail">
+			<text class="detail-content">{{detailContent}}</text>
+			<view class="detail-from">
+				<text> from：{{detailFrom}} </text>
+			</view>
+			<view wx:for="{{detailComments}}" wx:for-item="comItem" class="weui-media-box weui-media-box_text detail-comments">
+				<h5 class="weui-media-box__title comment-content">{{comItem.comment}}</h5>
+				<p class="weui-media-box__desc comment-time">{{comItem.time}}</p>
+			</view>
+		</view>
+	</block>
 </view>

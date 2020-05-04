@@ -22,32 +22,32 @@ Page({
    * 获取输入的content信息
    */
   contentInput: function(e) {
-    this.data.content = e.detail.value;
+    this.data.content = e.detail.value.trim();
   },
 
   /**
    * 获取输入的来源信息
    */
   originInput: function(e) {
-    this.data.origin = e.detail.value;
+    this.data.origin = e.detail.value.trim();
   },
 
   /**
    * 插入用户输入的记录进数据库
    */
   async insertRecord() {
+    this.data.content = this.data.content.trim()
     if (this.data.content.length == 0 || this.data.origin.length == 0) {
       wx.showToast({
         title: '不能留空哟',
-        image:"../../image/daidai.png",
+        image: "../../image/daidai.png",
         duration: 2000
       });
     } else {
-      await this.updateCount();
       await db.collection(this.data.config.dbCount).doc(this.data.config.docCount).get().then((res) => {
         db.collection(this.data.config.dbData).add({
           data: {
-            _id: res.data.count,
+            _id: res.data.count + 1,
             content: this.data.content,
             origin: this.data.origin
           },
@@ -57,6 +57,7 @@ Page({
           fail: console.error
         });
       });
+      await this.updateCount();
       wx.showToast({
         title: '快乐已入库',
         duration: 2000
@@ -75,12 +76,11 @@ Page({
     return new Promise((resolve) => {
       wx.cloud.callFunction({
         name: 'incrCount',
-        data:{
+        data: {
           dbName: this.data.config.dbCount,
           docName: this.data.config.docCount
         },
         success() {
-          console.log("调用云函数成功");
           resolve();
         },
         fail: console.error
@@ -92,7 +92,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    
+
   },
 
   /**

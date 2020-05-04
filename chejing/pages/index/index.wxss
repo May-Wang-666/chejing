@@ -1,16 +1,31 @@
 /**index.wxss**/
+@import '/dist/style/weui.wxss';
 
-page{
+/* page{
   height:100%;
-}
+} */
 
 .background {
   width: 70%;
   height: 70%;
-  position:fixed; 
+  /* position:fixed; 
   top:330rpx;
   background-size:100% 100%;
-  z-index: -1; 
+  z-index: -1;  */
+}
+
+.happy_item {
+  font-size: 10pt;
+  line-height: 60rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.happy_wrapper {
+  margin: 0 auto;
+  width: 80%;
+  padding: 20rpx 30rpx !important;
 }
 
 .userinfo {
@@ -29,8 +44,38 @@ page{
 
 .userinfo-nickname {
   color: #aaa;
+  margin-bottom: 50rpx;
 }
 
 .usermotto {
   margin-top: 20px;
+}
+
+.detail{
+  background-color: #f2f2f2;
+  width: 100%;
+  padding: 30rpx 35rpx;
+}
+
+.detail-content {
+  font-size: 11pt;
+}
+
+.detail-from {
+  font-size: smaller;
+  color: #11cd6e;
+  margin-bottom: 20rpx;
+  margin-top: 10rpx;
+}
+
+.detail-comments {
+  padding: 4rpx 0rpx !important;
+}
+
+.comment-content {
+  font-size: 10pt !important;
+}
+
+.comment-time {
+  font-size: 8pt !important;
 }

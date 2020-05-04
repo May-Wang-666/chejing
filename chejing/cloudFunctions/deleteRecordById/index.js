@@ -6,11 +6,12 @@ const db = cloud.database();
 // 云函数入口函数
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext();
+  let {userInfo, collection, id} = event;
 
   // 根据传入的集合名和文档 id 删除记录
-  db.collection(event.collection).doc(event.id).remove({
+  await db.collection(collection).doc(id).remove({
     success: function (res) {
-      console.log(res.data)
+      console.log(res.data);
     }
   });
 

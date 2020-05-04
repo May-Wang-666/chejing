@@ -15,7 +15,7 @@
     "selectedColor": "#11cd6e",
     "borderStyle": "black",
     "list": [
-      { 
+      {
         "selectedIconPath": "./image/shock-green.png",
         "iconPath": "./image/happy-default.png",
         "pagePath": "pages/chejing/index",

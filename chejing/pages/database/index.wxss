@@ -13,6 +13,16 @@
   margin-top: 10rpx;
 }
 
+.wrapper-submit-img{
+  display: flex;
+  justify-content: center;
+}
+
+.submit-img{
+  height: 70rpx;
+  width: 70rpx;
+}
+
 #photo {
   display: flex;
   justify-content: center;
