@@ -50,20 +50,18 @@ Page({
             _id: res.data.count + 1,
             content: this.data.content,
             origin: this.data.origin
-          },
-          success(res) {
-            console.log(res);
-          },
-          fail: console.error
+          }
+        }).then((res) => {
+          this.updateCount();
+          wx.showToast({
+            title: '快乐已入库',
+            image: "../../image/success.png",
+            duration: 2000
+          });
+          this.setData({
+            content: ""
+          });
         });
-      });
-      await this.updateCount();
-      wx.showToast({
-        title: '快乐已入库',
-        duration: 2000
-      });
-      this.setData({
-        content: ""
       });
     }
   },

@@ -157,18 +157,15 @@ Page({
           comment: this.data.commentValue,
           time: Date.parse(new Date())
         },
-        success(res) {
-          console.log('insert comment sccess')
-        },
-        fail: console.error
+      }).then((res) => {
+          this.getComments();
       })
+      
       // 隐藏评论框
       this.setData({
         commentValue: null,
         hideCommentBox: true
       });
-
-      this.getComments();
 
       wx.showToast({
         title: '评论已入库',
