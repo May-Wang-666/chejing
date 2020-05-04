@@ -34,7 +34,7 @@ Page({
       db.collection(this.data.config.dbData)
         .where({
           _openid: this.data.openid
-        }).get().then((res) => {
+        }).orderBy("_id", "desc").get().then((res) => {
           this.setData({
             happiness: res.data
           })
@@ -128,6 +128,10 @@ Page({
     }
 
     this.getOpenid();
+  },
+
+  onShow: function() {
+    this.getHappiness()
   },
 
   getUserInfo: function (e) {

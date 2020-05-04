@@ -12,7 +12,7 @@
 	<image wx:if="{{!openid}}" src="../../image/success.png" class="background"></image>
 </view>
 
-<view wx:if="{{openid != null}}" class="weui-cell  weui-cell_access happy_wrapper" wx:for="{{happiness}}" wx:for-item="happyItem">
+<view wx:if="{{openid != null}}" class="weui-cell happy_wrapper" wx:for="{{happiness}}" wx:for-item="happyItem">
 	<p wx:if="{{detailId != happyItem._id}}" class="weui-cell__bd happy_item" bindtap="getDetail" id="{{happyItem._id}}">{{happyItem.content}}</p>
 	<block wx:else>
 		<view wx:if="{{detailId == happyItem._id}}" class="detail" bindtap="hideDetail">
@@ -21,7 +21,7 @@
 				<text> from：{{detailFrom}} </text>
 			</view>
 			<view wx:for="{{detailComments}}" wx:for-item="comItem" class="weui-media-box weui-media-box_text detail-comments">
-				<h5 class="weui-media-box__title comment-content">{{comItem.comment}}</h5>
+				<view class="comment-content">{{comItem.comment}}</view>
 				<p class="weui-media-box__desc comment-time">{{comItem.time}}</p>
 			</view>
 		</view>

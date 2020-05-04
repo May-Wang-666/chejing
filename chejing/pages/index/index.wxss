@@ -26,6 +26,7 @@
   margin: 0 auto;
   width: 80%;
   padding: 20rpx 30rpx !important;
+  border-top: 1px solid #11cd6e;
 }
 
 .userinfo {
@@ -69,7 +70,7 @@
 }
 
 .detail-comments {
-  padding: 4rpx 0rpx !important;
+  padding: 8rpx 0rpx !important;
 }
 
 .comment-content {

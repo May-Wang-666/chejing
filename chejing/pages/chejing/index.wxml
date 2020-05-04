@@ -29,7 +29,7 @@
 </view>
 
 <view id="comments" wx:for="{{comments}}" wx:for-item="comItem" class="weui-media-box weui-media-box_text comments-view">
-  <h5 class="weui-media-box__title comment-content">{{comItem.comment}}</h5>
+  <view class="comment-content" auto-height>{{comItem.comment}}</view>
   <p class="weui-media-box__desc comment-time">{{comItem.time}}</p>
 </view>
 
